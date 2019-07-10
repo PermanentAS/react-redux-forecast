@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withForecastService } from "./components/hoc/";
+import { todayWeather } from "./actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+import TodayWeather from "./components/today-weather";
+
+class App extends Component {
+  componentWillMount() {
+    const { forecastService, todayWeather } = this.props;
+    const data = forecastService.getWeather("Kiev");
+
+    console.log("getWeather() from App component response:  ", data);
+  }
+
+  render() {
+    // todayWeather(forecastService.getWeather("Kiev"))
+
+    return (
+      <div>
+        <TodayWeather />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = ({}) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  todayWeather
+};
+
+export default withForecastService()(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
