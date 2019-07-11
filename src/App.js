@@ -1,26 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withForecastService } from "./components/hoc/";
-import { todayWeather } from "./actions";
+import { todayWeather, weekWeather } from "./actions";
 
 import "./App.css";
 
+import Header from "./components/header";
 import TodayWeather from "./components/today-weather";
+import WeekWeather from "./components/week-weather";
 
 class App extends Component {
-  componentWillMount() {
-    const { forecastService, todayWeather } = this.props;
-    const data = forecastService.getWeather("Kiev");
+  state = {
+    todayWeather: null,
+    weekWeather: null
+  };
 
-    console.log("getWeather() from App component response:  ", data);
+  componentWillMount() {
+    this.updateWeather();
+  }
+
+  async updateWeather() {
+    const { forecastService } = this.props;
+    await forecastService.getWeather("Kiev").then(response => {
+      this.setState({ todayWeather: response });
+    });
+
+    await forecastService.getWeekWeather("Kiev").then(response => {
+      this.setState({ weekWeather: response });
+    });
+
+    this.props.todayWeather(this.state.todayWeather);
+    this.props.weekWeather(this.state.weekWeather);
   }
 
   render() {
-    // todayWeather(forecastService.getWeather("Kiev"))
-
     return (
       <div>
+        <Header />
         <TodayWeather />
+        <WeekWeather />
       </div>
     );
   }
@@ -31,7 +49,8 @@ const mapStateToProps = ({}) => {
 };
 
 const mapDispatchToProps = {
-  todayWeather
+  todayWeather,
+  weekWeather
 };
 
 export default withForecastService()(

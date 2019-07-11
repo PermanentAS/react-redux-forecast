@@ -8,7 +8,10 @@ const initialState = {
     temp_max: null ,
     temp_min: null 
   },
-  todayWeekWeather: null
+  weekWeather: {
+    city: null,
+    list: null
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,8 +19,13 @@ const reducer = (state = initialState, action) => {
     case "TODAY_WEATHER_FETCH":
       return {
         ...state,
-        todayWeather: {...action.payload}
+        todayWeather: action.payload
       };
+      case "WEEK_WEATHER_FETCH":
+      return {
+        ...state,
+        weekWeather: action.payload
+      }
     default:
       return state;
   }

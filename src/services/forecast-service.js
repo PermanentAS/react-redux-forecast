@@ -23,12 +23,12 @@ export default class ForecastService {
   };
 
   getWeekWeather = async city => {
-    const res = await axios
-      .get(
-        `${this._apiBase}forecast?q=${city}&APPID=${this._apiKey}&units=metric`
-      )
-      .then(res => res.data)
-      .catch(err => err);
+    const res = await this.getData(
+      `${this._apiBase}forecast?q=${city}&APPID=${this._apiKey}&units=metric`
+    );
+
+    console.log("getWeekWeather() from service response: ",this._transformWeekWeather(res));
+
     return this._transformWeekWeather(res);
   };
 
@@ -37,6 +37,7 @@ export default class ForecastService {
       id: res.id,
       city: res.name,
       weather: res.weather[0].description,
+      icon: res.weather[0].icon,
       temp: res.main.temp,
       humidity: res.main.humidity,
       temp_max: res.main.temp_max,
@@ -47,7 +48,7 @@ export default class ForecastService {
   _transformWeekWeather = res => {
     return {
       city: res.city.name,
-      list: [res.list[0], res.list[1], res.list[2], res.list[3], res.list[4], res.list[5], res.list[6]]
+      list: [res.list[0], res.list[7], res.list[15], res.list[23], res.list[31], res.list[39]]
     };
   };
 }
