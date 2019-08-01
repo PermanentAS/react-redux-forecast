@@ -7,6 +7,7 @@ import "./index.css";
 import App from "./App";
 import ForecastService from "./services/forecast-service";
 import { ForecastServiceProvider } from "./components/forecast-service-context";
+import ErrorBoundry from "./components/error-boundry";
 
 import store from "./store";
 
@@ -14,11 +15,15 @@ const forecastService = new ForecastService();
 
 ReactDOM.render(
   <Provider store={store}>
-    <ForecastServiceProvider value={forecastService}>
+    <ErrorBoundry>
       <Router>
-        <App />
+        <ForecastServiceProvider value={forecastService}>
+          <Router>
+            <App />
+          </Router>
+        </ForecastServiceProvider>
       </Router>
-    </ForecastServiceProvider>
+    </ErrorBoundry>
   </Provider>,
   document.getElementById("root")
 );

@@ -1,0 +1,23 @@
+.error-indicator {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #dc143c;
+  }
+  
+  .error-indicator .icon {
+    font-size: 80px;
+  }
+  
+  .error-title {
+    font-weight: bold;
+    font-size: 50px;
+    font-family: "Playfair Display", Georgia, serif;
+  }
+  
+  .error-text {
+    font-size: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }

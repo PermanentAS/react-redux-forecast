@@ -1,19 +1,80 @@
-
-const todayWeather = todayWeather => {
+const fetchTodayWeather = todayWeather => {
   return {
-    type: "TODAY_WEATHER_FETCH",
+    type: "TODAY_WEATHER_FETCH_SUCCESS",
     payload: todayWeather
   };
 };
 
-const weekWeather = weekWeather => {
-  console.log("action: ", weekWeather);
+const fetchWeekWeather = weekWeather => {
   return {
-    type: "WEEK_WEATHER_FETCH",
+    type: "WEEK_WEATHER_FETCH_SUCCESS",
     payload: weekWeather
   };
 };
 
+const fetchNewCity = city => {
+  return {
+    type: "NEW_CITY_INPUT",
+    payload: city
+  };
+};
 
+const fetchingStarted = () => {
+  return {
+    type: "FETCHING_STARTED",
+  };
+};
 
-export { todayWeather, weekWeather };
+const fetchingFinished = () => {
+  return {
+    type: "FETCHING_FINISHED",
+  };
+};
+
+const updateHistory = () => {
+  return {
+    type: "UPDATE_HISTORY"
+  };
+};
+
+const updateWeatherFromHirtory = (id) => {
+  return {
+    type: "UPDATE_WEATHER_FROM_HISTORY",
+    payload: id
+  };
+}
+
+const fetchTodayWeatherThunk = forecastService => city => dispatch => {
+  dispatch(fetchingStarted());
+  forecastService
+    .getWeather(city)
+    .then(data => {
+      dispatch(fetchTodayWeather(data));
+    })
+    .then(() => {
+      forecastService
+        .getWeekWeather(city)
+        .then(data => {
+          dispatch(fetchWeekWeather(data));
+          dispatch(fetchingFinished());
+        })
+        .then(() => {
+          dispatch(updateHistory());
+        });
+    }).catch ((err) => err);
+};
+
+const errorCatched = () => {
+  return{
+    type: 'ERROR_CATCHED',
+    payload: true
+  }
+}
+
+export {
+  fetchNewCity,
+  fetchTodayWeatherThunk,
+  updateHistory,
+  updateWeatherFromHirtory,
+  errorCatched
+};

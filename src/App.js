@@ -1,56 +1,52 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { withForecastService } from "./components/hoc/";
-import { todayWeather, weekWeather } from "./actions";
+import { fetchTodayWeatherThunk, updateHistory } from "./actions";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.css";
 
 import Header from "./components/header";
+import Input from "./components/input";
 import TodayWeather from "./components/today-weather";
 import WeekWeather from "./components/week-weather";
+import History from "./components/history";
 
 class App extends Component {
-  state = {
-    todayWeather: null,
-    weekWeather: null
-  };
-
-  componentWillMount() {
-    this.updateWeather();
-  }
-
-  async updateWeather() {
-    const { forecastService } = this.props;
-    await forecastService.getWeather("Kiev").then(response => {
-      this.setState({ todayWeather: response });
-    });
-
-    await forecastService.getWeekWeather("Kiev").then(response => {
-      this.setState({ weekWeather: response });
-    });
-
-    this.props.todayWeather(this.state.todayWeather);
-    this.props.weekWeather(this.state.weekWeather);
+  componentDidMount() {
+    const { fetchTodayWeatherThunk } = this.props;
+    fetchTodayWeatherThunk("Kiev");
   }
 
   render() {
     return (
       <div>
         <Header />
-        <TodayWeather />
-        <WeekWeather />
+        <Input />
+          <Switch>
+            <Route path="/" component={TodayWeather} exact />
+            <Route path="/week" component={WeekWeather} />
+            <Route path="/" />
+          </Switch>
+        <History />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({}) => {
-  return {};
+const mapStateToProps = ({ currentCity }) => {
+  return { currentCity };
 };
 
-const mapDispatchToProps = {
-  todayWeather,
-  weekWeather
+const mapDispatchToProps = (dispatch, { forecastService }) => {
+  return bindActionCreators(
+    {
+      fetchTodayWeatherThunk: fetchTodayWeatherThunk(forecastService),
+      updateHistory: updateHistory
+    },
+    dispatch
+  );
 };
 
 export default withForecastService()(

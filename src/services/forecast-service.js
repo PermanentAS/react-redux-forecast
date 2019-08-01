@@ -1,16 +1,15 @@
 import axios from "axios";
 
 export default class ForecastService {
-  _apiKey = "b31b19c0585fd0eb8c5011d1c180c7d4";
+  _apiKey = "b4655c5e515d5be817ed70a0a7f55407";
   _apiBase = "http://api.openweathermap.org/data/2.5/";
-  _imgBase = "http://api.openweathermap.org/img/w/";
 
   getData = async url => {
     try {
       const response = await axios.get(url);
-      return response.data
+      return response.data;
     } catch (error) {
-      return error
+      return error;
     }
   };
 
@@ -18,7 +17,6 @@ export default class ForecastService {
     const res = await this.getData(
       `${this._apiBase}weather?q=${city}&APPID=${this._apiKey}&units=metric`
     );
-      console.log("getWeather() from service response: ",this._transformWeather(res));
     return this._transformWeather(res);
   };
 
@@ -26,13 +24,10 @@ export default class ForecastService {
     const res = await this.getData(
       `${this._apiBase}forecast?q=${city}&APPID=${this._apiKey}&units=metric`
     );
-
-    console.log("getWeekWeather() from service response: ",this._transformWeekWeather(res));
-
     return this._transformWeekWeather(res);
   };
 
-  _transformWeather = (res) => {
+  _transformWeather = res => {
     return {
       id: res.id,
       city: res.name,
@@ -48,7 +43,14 @@ export default class ForecastService {
   _transformWeekWeather = res => {
     return {
       city: res.city.name,
-      list: [res.list[0], res.list[7], res.list[15], res.list[23], res.list[31], res.list[39]]
+      list: [
+        res.list[0],
+        res.list[7],
+        res.list[15],
+        res.list[23],
+        res.list[31],
+        res.list[39]
+      ]
     };
   };
 }

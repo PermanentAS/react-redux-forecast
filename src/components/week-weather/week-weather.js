@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import dateFns from "date-fns";
+import { Link } from "react-router-dom";
 
-const WeekWeather = ({ weekWeather: { city, list } }) => {
-  if (list) {
+import Spinner from "../spinner";
 
+const WeekWeather = ({ weekWeather }) => {
+  if (weekWeather.city !== undefined) {
+    const { city, list } = weekWeather;
     return (
       <div className="card">
         <div className="card-body">
@@ -12,16 +15,26 @@ const WeekWeather = ({ weekWeather: { city, list } }) => {
           <table className="table table-striped">
             <tbody>
               <tr>
-                <th scope="row" >Date</th>
+                <th scope="row">Date</th>
                 {list.map((item, index) => (
-                  <td key={index} className="font-weight-bold">{dateFns.format(dateFns.addDays(new Date(), index), "D MMMM YYYY")}</td>
+                  <td key={index} className="font-weight-bold">
+                    {dateFns.format(
+                      dateFns.addDays(new Date(), index),
+                      "D MMMM YYYY"
+                    )}
+                  </td>
                 ))}
               </tr>
               <tr>
-                <th scope="row" ></th>
+                <th scope="row" />
                 {list.map((item, index) => (
                   <td key={index} className="font-weight-bold">
-                  <img src={`http://api.openweathermap.org/img/w/${item.weather[0].icon}`} />
+                    <img
+                      src={`http://api.openweathermap.org/img/w/${
+                        item.weather[0].icon
+                      }`}
+                      alt="img"
+                    />
                   </td>
                 ))}
               </tr>
@@ -54,12 +67,14 @@ const WeekWeather = ({ weekWeather: { city, list } }) => {
             </tbody>
           </table>
 
-          <span className="btn btn-primary">Go back</span>
+          <Link to="/">
+            <span className="btn btn-primary">Go back</span>
+          </Link>
         </div>
       </div>
     );
   } else {
-    return <div>Fetching data</div>;
+    return <Spinner />;
   }
 };
 
