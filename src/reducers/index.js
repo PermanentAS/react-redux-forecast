@@ -72,6 +72,10 @@ const reducer = (state = initialState, action) => {
         currentCity: action.payload
       };
     case "FETCHING_STARTED":
+      return {
+        ...state,
+        hasError: false
+      };
     case "FETCHING_FINISHED":
       return {
         ...state

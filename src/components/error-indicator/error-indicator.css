@@ -4,6 +4,7 @@
     flex-direction: column;
     text-align: center;
     color: #dc143c;
+    width: 500px;
   }
   
   .error-indicator .icon {
@@ -13,11 +14,11 @@
   .error-title {
     font-weight: bold;
     font-size: 50px;
-    font-family: "Playfair Display", Georgia, serif;
   }
   
   .error-text {
-    font-size: 15px;
+    font-size: 20px;
     max-width: 400px;
     margin: 0 auto;
+    margin-bottom: 100px;
   }

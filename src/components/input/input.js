@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { fetchNewCity, fetchTodayWeatherThunk } from "./../../actions";
+import { fetchNewCity, fetchWeatherThunk } from "./../../actions";
 import { withForecastService } from "../hoc";
 
 class Input extends Component {
@@ -15,12 +15,12 @@ class Input extends Component {
   };
 
   onClickButtonHandler = () => {
-    const { fetchNewCity, fetchTodayWeatherThunk } = this.props;
+    const { fetchNewCity, fetchWeatherThunk } = this.props;
     const { inputValue } = this.state;
 
     if (inputValue !== "") {
       fetchNewCity(inputValue);
-      fetchTodayWeatherThunk(inputValue);
+      fetchWeatherThunk(inputValue);
       // fetchWeekWeatherThunk(inputValue);
     }
   };
@@ -60,7 +60,7 @@ const mapStateToProps = ({ currentCity }) => {
 const mapDispatchToProps = (dispatch, { forecastService }) => {
   return bindActionCreators(
     {
-      fetchTodayWeatherThunk: fetchTodayWeatherThunk(forecastService),
+      fetchWeatherThunk: fetchWeatherThunk(forecastService),
       fetchNewCity: fetchNewCity
     },
     dispatch

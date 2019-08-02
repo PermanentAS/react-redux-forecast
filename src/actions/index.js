@@ -44,7 +44,7 @@ const updateWeatherFromHirtory = (id) => {
   };
 }
 
-const fetchTodayWeatherThunk = forecastService => city => dispatch => {
+const fetchWeatherThunk = forecastService => city => dispatch => {
   dispatch(fetchingStarted());
   forecastService
     .getWeather(city)
@@ -61,7 +61,7 @@ const fetchTodayWeatherThunk = forecastService => city => dispatch => {
         .then(() => {
           dispatch(updateHistory());
         });
-    }).catch ((err) => err);
+    }).catch ((err) => dispatch(errorCatched()));
 };
 
 const errorCatched = () => {
@@ -73,7 +73,7 @@ const errorCatched = () => {
 
 export {
   fetchNewCity,
-  fetchTodayWeatherThunk,
+  fetchWeatherThunk,
   updateHistory,
   updateWeatherFromHirtory,
   errorCatched
