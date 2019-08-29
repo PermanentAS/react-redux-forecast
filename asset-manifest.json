@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-redux-forecast/static/css/main.d240ba5e.chunk.css",
-    "main.js": "/react-redux-forecast/static/js/main.8d2c7659.chunk.js",
-    "main.js.map": "/react-redux-forecast/static/js/main.8d2c7659.chunk.js.map",
+    "main.js": "/react-redux-forecast/static/js/main.4c672432.chunk.js",
+    "main.js.map": "/react-redux-forecast/static/js/main.4c672432.chunk.js.map",
     "runtime~main.js": "/react-redux-forecast/static/js/runtime~main.ed024d0a.js",
     "runtime~main.js.map": "/react-redux-forecast/static/js/runtime~main.ed024d0a.js.map",
     "static/js/2.90acd1a1.chunk.js": "/react-redux-forecast/static/js/2.90acd1a1.chunk.js",
     "static/js/2.90acd1a1.chunk.js.map": "/react-redux-forecast/static/js/2.90acd1a1.chunk.js.map",
     "index.html": "/react-redux-forecast/index.html",
-    "precache-manifest.1292eef5c2014ee18dacf9b779b46b7f.js": "/react-redux-forecast/precache-manifest.1292eef5c2014ee18dacf9b779b46b7f.js",
+    "precache-manifest.2efd393ae02fad58d9643ec534b37e75.js": "/react-redux-forecast/precache-manifest.2efd393ae02fad58d9643ec534b37e75.js",
     "service-worker.js": "/react-redux-forecast/service-worker.js",
     "static/css/main.d240ba5e.chunk.css.map": "/react-redux-forecast/static/css/main.d240ba5e.chunk.css.map"
   }
