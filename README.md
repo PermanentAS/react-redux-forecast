@@ -1,6 +1,6 @@
 # Forecast app
 
-# Link: https://permanentas.github.io/react-redux-forecast/
+## Link: https://permanentas.github.io/react-redux-forecast/
 
 + The user enters a city into input field and has a detailed, visualised forecast for today.
 
