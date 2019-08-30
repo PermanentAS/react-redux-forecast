@@ -57,7 +57,7 @@ const TodayWeather = ({ todayWeather }) => {
             </tbody>
           </table>
 
-          <Link to="/week">
+          <Link to={process.env.PUBLIC_URL + "/week"}>
             <span className="btn btn-primary">Show week forecast</span>
           </Link>
         </div>

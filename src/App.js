@@ -27,9 +27,9 @@ class App extends Component {
         <Input />
         <ErrorBoundry>
           <Switch>
-            <Route path="/" component={TodayWeather} exact />
-            <Route path="/week" component={WeekWeather} />
-            <Route path="/" />
+            <Route path={process.env.PUBLIC_URL + "/"} component={TodayWeather} exact />
+            <Route path={process.env.PUBLIC_URL + "/week"} component={WeekWeather} />
+            <Route path={process.env.PUBLIC_URL + "/"} />
           </Switch>
         </ErrorBoundry>
         <History />

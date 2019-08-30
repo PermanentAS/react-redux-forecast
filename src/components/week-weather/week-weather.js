@@ -67,7 +67,7 @@ const WeekWeather = ({ weekWeather }) => {
             </tbody>
           </table>
 
-          <Link to="/">
+          <Link to={process.env.PUBLIC_URL + "/"}>
             <span className="btn btn-primary">Go back</span>
           </Link>
         </div>

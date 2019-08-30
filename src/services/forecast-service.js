@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class ForecastService {
   _apiKey = "b4655c5e515d5be817ed70a0a7f55407";
-  _apiBase = "http://api.openweathermap.org/data/2.5/";
+  _apiBase = "//api.openweathermap.org/data/2.5/";
 
   getData = async url => {
     try {
